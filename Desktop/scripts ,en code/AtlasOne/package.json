@@ -4,6 +4,9 @@
   "description": "Discord.js v14 slash-command only bot with FAQ, reminders, polls, moderation, leveling, utilities, and logging.",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node index.js",
     "deploy": "node deploy-commands.js"

@@ -26,7 +26,7 @@ data/
 logs/
 ```
 
-## Setup
+## Local Setup
 1. Install dependencies:
 ```powershell
 npm install
@@ -46,6 +46,30 @@ npm run deploy
 ```powershell
 npm start
 ```
+
+## Deploy to Render.com (24/7 Hosting)
+1. Push your code to GitHub (already done).
+2. Go to [Render Dashboard](https://dashboard.render.com/) and sign in.
+3. Click **New** → **Web Service**.
+4. Connect your GitHub account and select the `twisterboi123/AtlasOne` repository.
+5. Render will auto-detect `render.yaml`. Confirm the settings:
+   - **Name**: atlasone-bot
+   - **Environment**: Node
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+   - **Plan**: Free (or upgrade for always-on)
+6. Add environment variables in the Render dashboard:
+   - `DISCORD_TOKEN` = your bot token
+   - `DISCORD_APP_ID` = your application ID
+   - `DISCORD_GUILD_ID` = (optional) your guild ID
+7. Click **Create Web Service**.
+8. Once deployed, run slash command registration manually from your local machine:
+```powershell
+npm run deploy
+```
+9. Your bot will now run 24/7 on Render's free tier (sleeps after 15 min inactivity; wakes on events).
+
+**Note**: Render's free tier spins down after inactivity. For true 24/7 uptime, upgrade to a paid plan or use a cron job to ping the service.
 
 ## Notes
 - Use a guild ID during development for instant command updates.
