@@ -11,5 +11,3 @@ services:
         sync: false
       - key: DISCORD_APP_ID
         sync: false
-      - key: DISCORD_GUILD_ID
-        sync: false

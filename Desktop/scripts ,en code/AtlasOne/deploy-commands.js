@@ -5,7 +5,6 @@ import path from 'path';
 
 const token = process.env.DISCORD_TOKEN;
 const appId = process.env.DISCORD_APP_ID; // Application (client) ID
-const guildId = process.env.DISCORD_GUILD_ID; // Optional for guild-scope
 
 if(!token || !appId){
   console.error('DISCORD_TOKEN and DISCORD_APP_ID required.');
@@ -32,13 +31,10 @@ const rest = new REST({ version: '10' }).setToken(token);
 (async ()=>{
   const cmds = await collect();
   try {
-    if(guildId){
-      await rest.put(Routes.applicationGuildCommands(appId, guildId), { body: cmds });
-      console.log(`Registered ${cmds.length} guild commands.`);
-    } else {
-      await rest.put(Routes.applicationCommands(appId), { body: cmds });
-      console.log(`Registered ${cmds.length} global commands.`);
-    }
+    console.log(`Registering ${cmds.length} global commands (available on all servers)...`);
+    await rest.put(Routes.applicationCommands(appId), { body: cmds });
+    console.log(`Successfully registered ${cmds.length} global commands.`);
+    console.log('Note: Global commands may take up to 1 hour to propagate across all servers.');
   } catch(e){
     console.error('Failed to register commands', e);
   }

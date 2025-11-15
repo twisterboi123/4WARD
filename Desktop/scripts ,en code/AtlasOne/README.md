@@ -35,13 +35,13 @@ npm install
 ```powershell
 $env:DISCORD_TOKEN="YOUR_BOT_TOKEN"
 $env:DISCORD_APP_ID="YOUR_APPLICATION_ID"
-# Optional for guild-scoped registration (faster propagation)
-$env:DISCORD_GUILD_ID="YOUR_GUILD_ID"
 ```
-3. Register slash commands:
+3. Register slash commands globally (works on all servers):
 ```powershell
 npm run deploy
 ```
+**Note**: Global commands take up to 1 hour to appear in Discord.
+
 4. Start the bot:
 ```powershell
 npm start
@@ -61,13 +61,17 @@ npm start
 6. Add environment variables in the Render dashboard:
    - `DISCORD_TOKEN` = your bot token
    - `DISCORD_APP_ID` = your application ID
-   - `DISCORD_GUILD_ID` = (optional) your guild ID
 7. Click **Create Web Service**.
-8. Once deployed, run slash command registration manually from your local machine:
+8. Once deployed, run slash command registration from your local machine:
 ```powershell
 npm run deploy
 ```
-9. Your bot will now run 24/7 on Render's free tier (sleeps after 15 min inactivity; wakes on events).
+Commands will be available globally on all servers where the bot is invited.
+
+9. Invite your bot to servers using this URL (replace YOUR_APP_ID):
+```
+https://discord.com/api/oauth2/authorize?client_id=YOUR_APP_ID&permissions=8&scope=bot%20applications.commands
+```
 
 **Note**: Render's free tier spins down after inactivity. For true 24/7 uptime, upgrade to a paid plan or use a cron job to ping the service.
 
